@@ -1,36 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package nst.springboot.restexample01.controller.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+
 import java.io.Serializable;
 
-/**
- *
- * @author Dules
- */
 @Entity
-@Table(name = "tbl_subject")
+@Table(name = "subject")
 public class Subject implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Ime je obavezno polje")
-    @Size(min = 2, max = 10, message = "Broj znakova je od 2 do 10")
-    @Column(name = "name")
+    @NotEmpty(message = "Name is mandatory field")
+    @Size(min = 2, max = 10, message = "Number of characters is from 2 to 10")
     private String name;
 
     private int esbp;
@@ -80,6 +65,6 @@ public class Subject implements Serializable {
     public void setDepartment(Department department) {
         this.department = department;
     }
-    
-    
+
+
 }

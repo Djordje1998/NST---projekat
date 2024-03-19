@@ -1,40 +1,41 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package nst.springboot.restexample01.controller.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
-/**
- *
- * @author student2
- */
 @Entity
-@Table(name = "tbl_department")
+@Table(name = "department")
 public class Department {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotEmpty(message = "Ime je obavezno polje")
-    @Size(min = 2, max = 10, message = "Broj znakova je od 2 do 10")
-    @Column(name = "name")
+    @NotEmpty(message = "Name is mandatory field")
+    @Size(min = 5, max = 20, message = "Number of characters is from 5 to 20")
     private String name;
+
+    @NotEmpty(message = "ShortName is mandatory field")
+    @Size(min = 2, max = 5, message = "Number of characters is from 2 to 5")
+    @Column(name = "short_name")
+    private String shortName;
+
+    @OneToOne
+    @JoinColumn(name = "manager_id")
+    private Member manager;
+
+    @OneToOne
+    @JoinColumn(name = "secretary_id")
+    private Member secretary;
 
     public Department() {
     }
 
-    public Department(Long id, String name) {
+    public Department(Long id, String name, String shortName) {
         this.id = id;
         this.name = name;
+        this.shortName = shortName;
     }
 
     public String getName() {
@@ -51,6 +52,14 @@ public class Department {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
     }
     
 }
