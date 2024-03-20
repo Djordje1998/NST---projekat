@@ -10,6 +10,7 @@ public class EducationTitle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @NotEmpty(message = "Name is mandatory field")
     private String name;
 
