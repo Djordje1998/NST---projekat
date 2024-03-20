@@ -1,7 +1,6 @@
 package nst.springboot.restexample01.controller.domain;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
@@ -31,12 +30,18 @@ public class DepartmentRoleHistory {
     public DepartmentRoleHistory() {
     }
 
-    public DepartmentRoleHistory(Long id, Date startDate, Date endDate, Member member, Department department, String role) {
+    public DepartmentRoleHistory(
+            Long id,
+            Date startDate,
+            Date endDate,
+            Department department,
+            Member member,
+            String role) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.member = member;
         this.department = department;
+        this.member = member;
         this.role = role;
     }
 

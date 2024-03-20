@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package nst.springboot.restexample01.controller.service.impl;
 
 import java.util.List;
@@ -16,10 +12,6 @@ import nst.springboot.restexample01.exception.DepartmentAlreadyExistException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author student2
- */
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
@@ -58,7 +50,6 @@ public class DepartmentServiceImpl implements DepartmentService {
         } else {
             throw new Exception("Department does not exist!");
         }
-
     }
 
     @Override

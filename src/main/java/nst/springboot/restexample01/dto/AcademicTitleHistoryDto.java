@@ -14,13 +14,19 @@ public class AcademicTitleHistoryDto {
     public AcademicTitleHistoryDto() {
     }
 
-    public AcademicTitleHistoryDto(Long id, Date startDate, Date endDate, AcademicTitleDto academicTitle, ScientificFieldDto scientificField, MemberDto member) {
+    public AcademicTitleHistoryDto(
+            Long id,
+            Date startDate,
+            Date endDate,
+            MemberDto member,
+            AcademicTitleDto academicTitle,
+            ScientificFieldDto scientificField) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.member = member;
         this.academicTitle = academicTitle;
         this.scientificField = scientificField;
-        this.member = member;
     }
 
     public Long getId() {

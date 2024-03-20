@@ -1,6 +1,6 @@
 package nst.springboot.restexample01.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class DepartmentRoleHistoryDto {
 
@@ -14,7 +14,13 @@ public class DepartmentRoleHistoryDto {
     public DepartmentRoleHistoryDto() {
     }
 
-    public DepartmentRoleHistoryDto(Long id, Date startDate, Date endDate, DepartmentDto department, MemberDto member, String role) {
+    public DepartmentRoleHistoryDto(
+            Long id,
+            Date startDate,
+            Date endDate,
+            DepartmentDto department,
+            MemberDto member,
+            String role) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;

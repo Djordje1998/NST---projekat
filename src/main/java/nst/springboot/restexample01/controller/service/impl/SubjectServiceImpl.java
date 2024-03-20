@@ -25,15 +25,15 @@ import org.springframework.stereotype.Service;
 public class SubjectServiceImpl implements SubjectService {
 
     private DepartmentConverter departmentConverter;
-    private SubjectConverter subjectConverter;
-
-    private SubjectRepository subjectRepository;
     private DepartmentRepository departmentRepository;
+    private SubjectConverter subjectConverter;
+    private SubjectRepository subjectRepository;
 
     public SubjectServiceImpl(
             SubjectRepository subjectRepository,
             DepartmentRepository departmentRepository,
-            DepartmentConverter departmentConverter, SubjectConverter subjectConverter) {
+            DepartmentConverter departmentConverter, 
+            SubjectConverter subjectConverter) {
         this.departmentRepository = departmentRepository;
         this.subjectRepository = subjectRepository;
         this.departmentConverter = departmentConverter;

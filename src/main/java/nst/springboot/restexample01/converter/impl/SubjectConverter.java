@@ -7,26 +7,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SubjectConverter implements DtoEntityConverter<SubjectDto, Subject>{
+public class SubjectConverter implements DtoEntityConverter<SubjectDto, Subject> {
+    
     @Autowired
     private DepartmentConverter departmentConverter;
-    
+
     @Override
     public SubjectDto toDto(Subject entity) {
         return new SubjectDto(
-                entity.getId(), 
-                entity.getName(), entity.getEsbp(), 
-                departmentConverter.toDto(entity.getDepartment())
-        );
+                entity.getId(),
+                entity.getName(), entity.getEsbp(),
+                departmentConverter.toDto(entity.getDepartment()));
     }
 
     @Override
     public Subject toEntity(SubjectDto dto) {
         return new Subject(
-                dto.getId(), 
-                dto.getName(), 
+                dto.getId(),
+                dto.getName(),
                 dto.getEsbp(),
-        departmentConverter.toEntity(dto.getDepartmentDto()));
+                departmentConverter.toEntity(dto.getDepartmentDto()));
     }
-    
+
 }
