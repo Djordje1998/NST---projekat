@@ -1,7 +1,6 @@
 package nst.springboot.restexample01.controller.service;
 
 import java.util.List;
-
 import nst.springboot.restexample01.dto.MemberDto;
 
 public interface MemberService {

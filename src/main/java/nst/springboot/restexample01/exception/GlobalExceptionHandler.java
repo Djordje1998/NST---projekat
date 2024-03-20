@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package nst.springboot.restexample01.exception;
 
 import java.util.HashMap;
@@ -19,10 +15,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-/**
- *
- * @author student2
- */
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 

@@ -3,7 +3,6 @@ package nst.springboot.restexample01.controller.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-
 import java.io.Serializable;
 
 @Entity
