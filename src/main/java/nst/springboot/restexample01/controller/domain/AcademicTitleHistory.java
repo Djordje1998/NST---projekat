@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "academic_title_history")
-public class AcademicTitleHistory {
+public class AcademicTitleHistory implements EntityObject{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

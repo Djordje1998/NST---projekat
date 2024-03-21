@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "department_role_history")
-public class DepartmentRoleHistory {
+public class DepartmentRoleHistory implements EntityObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

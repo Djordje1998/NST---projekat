@@ -1,6 +1,6 @@
 package nst.springboot.restexample01.dto;
 
-public class MemberDto {
+public class MemberDto implements DtoObject{
 
     private Long id;
     private String firstName;
@@ -23,6 +23,7 @@ public class MemberDto {
         this.scientificField = scientificField;
     }
 
+    @Override
     public Long getId() {
         return id;
     }

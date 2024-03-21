@@ -2,7 +2,7 @@ package nst.springboot.restexample01.dto;
 
 import java.util.Date;
 
-public class DepartmentRoleHistoryDto {
+public class DepartmentRoleHistoryDto implements DtoObject{
 
     private Long id;
     private Date startDate;
@@ -29,6 +29,7 @@ public class DepartmentRoleHistoryDto {
         this.role = role;
     }
 
+    @Override
     public Long getId() {
         return id;
     }

@@ -1,10 +1,13 @@
 package nst.springboot.restexample01.converter.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import nst.springboot.restexample01.controller.domain.AcademicTitleHistory;
 import nst.springboot.restexample01.converter.DtoEntityConverter;
 import nst.springboot.restexample01.dto.AcademicTitleHistoryDto;
 
+@Component
 public class AcademicTitleHistoryConverter implements DtoEntityConverter<AcademicTitleHistoryDto, AcademicTitleHistory> {
 
     @Autowired

@@ -2,7 +2,7 @@ package nst.springboot.restexample01.dto;
 
 import java.util.Date;
 
-public class AcademicTitleHistoryDto {
+public class AcademicTitleHistoryDto implements DtoObject{
 
     private Long id;
     private Date startDate;
@@ -29,6 +29,7 @@ public class AcademicTitleHistoryDto {
         this.scientificField = scientificField;
     }
 
+    @Override
     public Long getId() {
         return id;
     }

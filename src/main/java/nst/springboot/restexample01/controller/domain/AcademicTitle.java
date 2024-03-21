@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "academic_title")
-public class AcademicTitle {
+public class AcademicTitle implements EntityObject{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

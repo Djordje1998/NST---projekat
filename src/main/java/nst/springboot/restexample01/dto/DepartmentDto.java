@@ -2,9 +2,8 @@ package nst.springboot.restexample01.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import java.io.Serializable;
 
-public class DepartmentDto implements Serializable{
+public class DepartmentDto implements DtoObject{
 
     private Long id;
     
@@ -25,6 +24,7 @@ public class DepartmentDto implements Serializable{
         this.shortName = shortName;
     }
 
+    @Override
     public Long getId() {
         return id;
     }

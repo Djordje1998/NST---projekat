@@ -1,6 +1,6 @@
 package nst.springboot.restexample01.dto;
 
-public class AcademicTitleDto {
+public class AcademicTitleDto implements DtoObject{
 
     private Long id;
     private String name;
@@ -13,6 +13,7 @@ public class AcademicTitleDto {
         this.name = name;
     }
 
+    @Override
     public Long getId() {
         return id;
     }

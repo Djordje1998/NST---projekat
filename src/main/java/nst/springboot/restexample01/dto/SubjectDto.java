@@ -1,8 +1,6 @@
 package nst.springboot.restexample01.dto;
 
-import java.io.Serializable;
-
-public class SubjectDto implements Serializable {
+public class SubjectDto implements DtoObject {
      
     private Long id;
     private String name;
@@ -19,6 +17,7 @@ public class SubjectDto implements Serializable {
         this.departmentDto = departmentDto;
     }
 
+    @Override
     public Long getId() {
         return id;
     }

@@ -3,11 +3,10 @@ package nst.springboot.restexample01.controller.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "subject")
-public class Subject implements Serializable {
+public class Subject implements EntityObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

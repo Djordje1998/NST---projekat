@@ -7,7 +7,7 @@ public interface MemberService {
 
     MemberDto save(MemberDto memberDto) throws Exception;
     List<MemberDto> getAll();
-    MemberDto delete(Long id) throws Exception;
+    boolean delete(Long id) throws Exception;
     MemberDto update(MemberDto memberDto) throws Exception;
     MemberDto findById(Long id) throws Exception;
  
