@@ -31,11 +31,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         if (dept.isPresent()) {
             throw new DepartmentAlreadyExistException("Department sa tim imenom postoji!");
         } else {
-            //DTO - > Entity
-            //Department department = new Department(departmentDto.getId(), departmentDto.getName());
-            Department department = departmentConverter.toEntity(departmentDto);
-            department = departmentRepository.save(department);
-            return departmentConverter.toDto(department);
+            return departmentConverter.toDto(departmentRepository.save(departmentConverter.toEntity(departmentDto)));
         }
     }
 

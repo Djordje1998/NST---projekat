@@ -2,6 +2,7 @@ package nst.springboot.restexample01.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +21,8 @@ import nst.springboot.restexample01.dto.AcademicTitleDto;
 @RequestMapping("/academic-title")
 public class AcademicTitleController {
 
+    @Autowired
     private AcademicTitleServiceImpl academicTitleService;
-
-    public AcademicTitleController(AcademicTitleServiceImpl academicTitleService) {
-        this.academicTitleService = academicTitleService;
-        System.out.println("kreiran je konroller za academic title!");
-    }
 
     @PostMapping
     public ResponseEntity<AcademicTitleDto> save(@Valid @RequestBody AcademicTitleDto academicTitleDto) throws Exception {
@@ -39,19 +36,19 @@ public class AcademicTitleController {
     }
 
     @GetMapping("/{id}")
-    public AcademicTitleDto findById(@PathVariable("id") Long id) throws Exception {
-        return academicTitleService.findById(id);
+    public ResponseEntity<AcademicTitleDto> findById(@PathVariable("id") Long id) throws Exception {
+        return ResponseEntity.ok(academicTitleService.findById(id));
     }
 
     @PatchMapping
-    public AcademicTitleDto update(AcademicTitleDto academicTitleDto) throws Exception {
-        return academicTitleService.update(academicTitleDto);
+    public ResponseEntity<AcademicTitleDto> update(AcademicTitleDto academicTitleDto) throws Exception {
+        return ResponseEntity.ok(academicTitleService.update(academicTitleDto));
     }
 
 
     @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable Long id) throws Exception {
-        return academicTitleService.delete(id);
+    public ResponseEntity<Boolean> delete(@PathVariable Long id) throws Exception {
+        return ResponseEntity.ok(academicTitleService.delete(id));
     }
 
 }

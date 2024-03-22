@@ -3,7 +3,6 @@ package nst.springboot.restexample01.controller.service.impl;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import nst.springboot.restexample01.controller.domain.Department;
 import nst.springboot.restexample01.controller.domain.Subject;
 import nst.springboot.restexample01.controller.repository.DepartmentRepository;
 import nst.springboot.restexample01.controller.repository.SubjectRepository;
@@ -58,7 +57,7 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public void update(SubjectDto subjectDto) throws Exception {
+    public SubjectDto update(SubjectDto subjectDto) throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
