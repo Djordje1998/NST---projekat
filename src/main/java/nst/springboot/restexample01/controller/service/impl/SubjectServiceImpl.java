@@ -10,30 +10,36 @@ import nst.springboot.restexample01.controller.service.SubjectService;
 import nst.springboot.restexample01.converter.impl.DepartmentConverter;
 import nst.springboot.restexample01.converter.impl.SubjectConverter;
 import nst.springboot.restexample01.dto.SubjectDto;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SubjectServiceImpl implements SubjectService {
 
+    @Autowired
     private DepartmentConverter departmentConverter;
-    private DepartmentRepository departmentRepository;
-    private SubjectConverter subjectConverter;
-    private SubjectRepository subjectRepository;
 
-    public SubjectServiceImpl(
-            SubjectRepository subjectRepository,
-            DepartmentRepository departmentRepository,
-            DepartmentConverter departmentConverter, 
-            SubjectConverter subjectConverter) {
-        this.departmentRepository = departmentRepository;
-        this.subjectRepository = subjectRepository;
-        this.departmentConverter = departmentConverter;
-        this.subjectConverter = subjectConverter;
-    }
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
+    @Autowired
+    private SubjectConverter subjectConverter;
+
+    @Autowired
+    private SubjectRepository subjectRepository;
 
     @Override
     public SubjectDto save(SubjectDto subjectDto) throws Exception {
-          throw new UnsupportedOperationException("Not supported yet.");
+        Optional<Subject> byId = subjectRepository.findById(subjectDto.getId());
+        Optional<Subject> byName = subjectRepository.findByName(subjectDto.getName());
+        if (byName.isPresent() || byId.isPresent()) {
+            throw new Exception("Subject already exists!");
+        }
+        subjectDto.setDepartmentDto(
+                departmentConverter.toDto(departmentRepository.findById(subjectDto.getDepartmentDto().getId())
+                        .orElseThrow(() -> new Exception("Department does not exist!"))));
+        return subjectConverter.toDto(subjectRepository.save(subjectConverter.toEntity(subjectDto)));
     }
 
     @Override
@@ -45,32 +51,29 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public void delete(Long id) throws Exception {
-        Optional<Subject> subject = subjectRepository.findById(id);
-        if (subject.isPresent()) {
-            Subject subj = subject.get();
-            subjectRepository.delete(subj);
-        } else {
-            throw new Exception("Subject does not exist!");
-        }
-
+    public SubjectDto findById(Long id) throws Exception {
+        Subject subject = subjectRepository.findById(id).orElseThrow(() -> new Exception("Subject does not exist!"));
+        return subjectConverter.toDto(subject);
     }
 
     @Override
     public SubjectDto update(SubjectDto subjectDto) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Subject existingSubject = subjectRepository.findById(subjectDto.getId())
+                .orElseThrow(() -> new Exception("Subject does not exist!"));
+
+        Optional<Subject> existingName = subjectRepository.findByName(subjectDto.getName());
+
+        if (existingName.isPresent() && !existingName.get().getId().equals(existingSubject.getId())) {
+            throw new Exception("Subject with the updated name already exists!");
+        }
+
+        return subjectConverter.toDto(subjectRepository.save(subjectConverter.toEntity(subjectDto)));
     }
 
     @Override
-    public SubjectDto findById(Long id) throws Exception {
-        Optional<Subject> subject = subjectRepository.findById(id);
-        if (subject.isPresent()) {
-            //postoji
-            Subject subj = subject.get();
-            return subjectConverter.toDto(subj);
-        } else {
-            throw new Exception("Subject does not exist!");
-        }
+    public void delete(Long id) throws Exception {
+        Subject subject = subjectRepository.findById(id).orElseThrow(() -> new Exception("Subject does not exist!"));
+        subjectRepository.delete(subject);
     }
 
 }

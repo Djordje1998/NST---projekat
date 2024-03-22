@@ -10,6 +10,6 @@ public interface AbstractCrudService<D extends DtoObject> {
     List<D> getAll();
     D findById(Long id) throws Exception;
     D update(D dto) throws Exception;
-    boolean delete(Long id) throws Exception;
+    void delete(Long id) throws Exception;
 
 }

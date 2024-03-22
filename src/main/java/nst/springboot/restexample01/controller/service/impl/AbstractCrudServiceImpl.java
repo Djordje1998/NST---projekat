@@ -41,11 +41,10 @@ public class AbstractCrudServiceImpl<D extends DtoObject, E extends EntityObject
         return converter.toDto(repository.save(converter.toEntity(dto)));
     }
 
-    public boolean delete(Long id) throws Exception {
+    public void delete(Long id) throws Exception {
         E entity = repository.findById(id)
                 .orElseThrow(() -> new Exception("Entity does not exist"));
         repository.delete(entity);
-        return true;
     }
 
 }

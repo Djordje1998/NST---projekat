@@ -25,7 +25,8 @@ public class AcademicTitleController {
     private AcademicTitleServiceImpl academicTitleService;
 
     @PostMapping
-    public ResponseEntity<AcademicTitleDto> save(@Valid @RequestBody AcademicTitleDto academicTitleDto) throws Exception {
+    public ResponseEntity<AcademicTitleDto> save(@Valid @RequestBody AcademicTitleDto academicTitleDto)
+            throws Exception {
         System.out.println("Kreiranje " + academicTitleDto.getName());
         return ResponseEntity.ok(academicTitleService.save(academicTitleDto));
     }
@@ -41,14 +42,15 @@ public class AcademicTitleController {
     }
 
     @PatchMapping
-    public ResponseEntity<AcademicTitleDto> update(AcademicTitleDto academicTitleDto) throws Exception {
+    public ResponseEntity<AcademicTitleDto> update(@Valid @RequestBody AcademicTitleDto academicTitleDto)
+            throws Exception {
         return ResponseEntity.ok(academicTitleService.update(academicTitleDto));
     }
 
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable Long id) throws Exception {
-        return ResponseEntity.ok(academicTitleService.delete(id));
+    public ResponseEntity<String> delete(@PathVariable Long id) throws Exception {
+        academicTitleService.delete(id);
+        return ResponseEntity.ok("Academic title removed!");
     }
 
 }

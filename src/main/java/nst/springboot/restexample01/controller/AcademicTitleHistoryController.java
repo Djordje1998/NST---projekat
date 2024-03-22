@@ -20,7 +20,7 @@ public class AcademicTitleHistoryController {
     private AcademicTitleHistoryServiceImpl academicTitleHistoryService;
 
     @GetMapping
-    public ResponseEntity<List<AcademicTitleHistoryDto>> getAll() throws Exception{
+    public ResponseEntity<List<AcademicTitleHistoryDto>> getAll() throws Exception {
         return ResponseEntity.ok(academicTitleHistoryService.getAll());
     }
 
