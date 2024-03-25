@@ -7,6 +7,6 @@ public interface DepartmentService {
     DepartmentDto save(DepartmentDto departmentDto) throws Exception;
     List<DepartmentDto> getAll();
     void delete(Long id) throws Exception;
-    void update(DepartmentDto department) throws Exception;
+    DepartmentDto update(DepartmentDto department) throws Exception;
     DepartmentDto findById(Long id) throws Exception;
 }

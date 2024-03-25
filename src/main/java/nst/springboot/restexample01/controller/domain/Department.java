@@ -21,21 +21,21 @@ public class Department implements EntityObject{
     @Column(name = "short_name")
     private String shortName;
 
-    @OneToOne
     @JoinColumn(name = "manager_id")
-    private Member manager;
+    private Long manager;
 
-    @OneToOne
     @JoinColumn(name = "secretary_id")
-    private Member secretary;
+    private Long secretary;
 
     public Department() {
     }
 
-    public Department(Long id, String name, String shortName) {
+    public Department(Long id, String name, String shortName, Long manager, Long secretary) {
         this.id = id;
         this.name = name;
         this.shortName = shortName;
+        this.manager = manager;
+        this.secretary = secretary;
     }
 
     public String getName() {
@@ -60,6 +60,22 @@ public class Department implements EntityObject{
 
     public void setShortName(String shortName) {
         this.shortName = shortName;
+    }
+
+    public Long getManager() {
+        return manager;
+    }
+
+    public void setManager(Long manager) {
+        this.manager = manager;
+    }
+
+    public Long getSecretary() {
+        return secretary;
+    }
+
+    public void setSecretary(Long secretary) {
+        this.secretary = secretary;
     }
     
 }

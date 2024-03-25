@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import nst.springboot.restexample01.controller.domain.DepartmentRoleHistory;
 
 public interface DepartmentRoleHistoryRepository extends JpaRepository<DepartmentRoleHistory, Long> {
-
+    Optional<DepartmentRoleHistory> findByMemberId(Long memberId);
 }

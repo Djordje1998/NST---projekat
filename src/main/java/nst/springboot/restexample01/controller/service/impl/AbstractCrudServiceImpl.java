@@ -19,6 +19,7 @@ public class AbstractCrudServiceImpl<D extends DtoObject, E extends EntityObject
     private JpaRepository<E, Long> repository;
 
     public D save(D dto) throws Exception {
+        dto.setId(null);
         return converter.toDto(repository.save(converter.toEntity(dto)));
     }
 

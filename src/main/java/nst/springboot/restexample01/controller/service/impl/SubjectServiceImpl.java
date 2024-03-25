@@ -31,11 +31,12 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public SubjectDto save(SubjectDto subjectDto) throws Exception {
-        Optional<Subject> byId = subjectRepository.findById(subjectDto.getId());
+        subjectDto.setId(null); // transform save or update to save
         Optional<Subject> byName = subjectRepository.findByName(subjectDto.getName());
-        if (byName.isPresent() || byId.isPresent()) {
-            throw new Exception("Subject already exists!");
+        if (byName.isPresent()) {
+            throw new Exception("Subject with that name already exists!");
         }
+
         subjectDto.setDepartmentDto(
                 departmentConverter.toDto(departmentRepository.findById(subjectDto.getDepartmentDto().getId())
                         .orElseThrow(() -> new Exception("Department does not exist!"))));
