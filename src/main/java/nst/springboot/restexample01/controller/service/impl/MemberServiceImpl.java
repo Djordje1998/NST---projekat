@@ -1,5 +1,6 @@
 package nst.springboot.restexample01.controller.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -7,7 +8,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import nst.springboot.restexample01.controller.domain.AcademicTitleHistory;
 import nst.springboot.restexample01.controller.domain.Member;
+import nst.springboot.restexample01.controller.repository.AcademicTitleHistoryRepository;
 import nst.springboot.restexample01.controller.repository.AcademicTitleRepository;
 import nst.springboot.restexample01.controller.repository.DepartmentRepository;
 import nst.springboot.restexample01.controller.repository.EducationTitleRepository;
@@ -15,6 +18,7 @@ import nst.springboot.restexample01.controller.repository.MemberRepository;
 import nst.springboot.restexample01.controller.repository.ScientificFieldRepository;
 import nst.springboot.restexample01.controller.service.MemberService;
 import nst.springboot.restexample01.converter.impl.AcademicTitleConverter;
+import nst.springboot.restexample01.converter.impl.AcademicTitleHistoryConverter;
 import nst.springboot.restexample01.converter.impl.DepartmentConverter;
 import nst.springboot.restexample01.converter.impl.EducationTitleConverter;
 import nst.springboot.restexample01.converter.impl.MemberConverter;
@@ -54,13 +58,24 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
+    @Autowired
+    private AcademicTitleHistoryRepository academicTitleHistoryRepository;
+
+    @Autowired
+    private AcademicTitleHistoryConverter academicTitleHistoryConverter;
+
     @Override
     public MemberDto save(MemberDto memberDto) throws Exception {
         if (memberDto == null) {
             throw new IllegalArgumentException("Member cannot be null!");
         }
         memberDto.setId(null);
-        return memberConverter.toDto(memberRepository.save(memberConverter.toEntity(this.fillDto(memberDto))));
+        Member saved = memberRepository.save(memberConverter.toEntity(this.fillDto(memberDto)));
+
+        academicTitleHistoryRepository.save(new AcademicTitleHistory(null,
+                new Date(), null, saved, saved.getAcademicTitle(), saved.getScientificField()));
+
+        return memberConverter.toDto(saved);
     }
 
     @Override
@@ -77,8 +92,18 @@ public class MemberServiceImpl implements MemberService {
         }
         memberRepository.findById(memberDto.getId())
                 .orElseThrow(() -> new NoSuchElementException("Member does not exist!"));
-        memberRepository.save(memberConverter.toEntity(this.fillDto(memberDto)));
-        return memberDto;
+
+        Member updated = memberRepository.save(memberConverter.toEntity(this.fillDto(memberDto)));
+
+        academicTitleHistoryRepository.findLastHistory(updated.getId())
+                .ifPresent(history -> {
+                    history.setEndDate(new Date());
+                    academicTitleHistoryRepository.save(history);
+                });
+        academicTitleHistoryRepository.save(new AcademicTitleHistory(null,
+                new Date(), null, updated, updated.getAcademicTitle(), updated.getScientificField()));
+
+        return memberConverter.toDto(updated);
     }
 
     @Override
