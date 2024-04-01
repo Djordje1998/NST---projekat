@@ -24,7 +24,7 @@ public class Member implements EntityObject{
     private Department department;
 
     @ManyToOne
-    @JoinColumn(name = "department_title_id")
+    @JoinColumn(name = "academic_title_id")
     private AcademicTitle academicTitle;
 
     @ManyToOne
