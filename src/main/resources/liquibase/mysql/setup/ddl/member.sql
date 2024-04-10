@@ -1,32 +1,17 @@
-CREATE TABLE IF NOT EXISTS public.member
-(
-    id bigint NOT NULL DEFAULT nextval('member_id_seq'::regclass),
-    first_name character varying(255) COLLATE pg_catalog."default",
-    last_name character varying(255) COLLATE pg_catalog."default",
-    department_title_id bigint,
-    department_id bigint,
-    education_title_id bigint,
-    scientific_field_id bigint,
-    CONSTRAINT member_pkey PRIMARY KEY (id),
-    CONSTRAINT fke4qtpd1mqhql26q8q7sb7w8ie FOREIGN KEY (department_title_id)
-        REFERENCES public.academic_title (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT fkkarn111hkvnoujdvxd60d4tc8 FOREIGN KEY (scientific_field_id)
-        REFERENCES public.scientific_field (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT fklmd4h7lh9acdyvi0xxbvsqrmk FOREIGN KEY (department_id)
-        REFERENCES public.department (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT fkousd9shldpot38vj7yepnuq83 FOREIGN KEY (education_title_id)
-        REFERENCES public.education_title (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-)
-
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public.member
-    OWNER to nstadmin;
+CREATE TABLE IF NOT EXISTS public.member (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) COLLATE pg_catalog."default",
+    last_name VARCHAR(255) COLLATE pg_catalog."default",
+    academic_title_id BIGINT,
+    department_id BIGINT,
+    education_title_id BIGINT,
+    scientific_field_id BIGINT,
+    CONSTRAINT fk_member_department_title FOREIGN KEY (academic_title_id)
+        REFERENCES public.academic_title (id),
+    CONSTRAINT fk_member_scientific_field FOREIGN KEY (scientific_field_id)
+        REFERENCES public.scientific_field (id),
+    CONSTRAINT fk_member_department FOREIGN KEY (department_id)
+        REFERENCES public.department (id),
+    CONSTRAINT fk_member_education_title FOREIGN KEY (education_title_id)
+        REFERENCES public.education_title (id)
+);

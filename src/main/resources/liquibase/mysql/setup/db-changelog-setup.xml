@@ -3,5 +3,57 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
+    <changeSet id="create-scientific-field" author="djordje">
+        <sqlFile path="ddl/scientific-field.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="init-scientific-field" author="djordje">
+        <sqlFile path="dml/init-scientific-field.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+     <changeSet id="create-academic-title" author="djordje">
+        <sqlFile path="ddl/academic-title.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="init-academic-title" author="djordje">
+        <sqlFile path="dml/init-academic-title.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-education-title" author="djordje">
+        <sqlFile path="ddl/education-title.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="init-education-title" author="djordje">
+        <sqlFile path="dml/init-education-title.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-department" author="djordje">
+        <sqlFile path="ddl/department.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="create-member" author="djordje">
+        <sqlFile path="ddl/member.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="init-department" author="djordje">
+        <sqlFile path="dml/init-department.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="init-member" author="djordje">
+        <sqlFile path="dml/init-member.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-subject" author="djordje">
+        <sqlFile path="ddl/subject.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="init-subject" author="djordje">
+        <sqlFile path="dml/init-subject.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-academic-title-history" author="djordje">
+        <sqlFile path="ddl/academic-title-history.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="init-academic-title-history" author="djordje">
+        <sqlFile path="dml/init-academic-title-history.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-department-role-history" author="djordje">
+        <sqlFile path="ddl/department-role-history.sql" relativeToChangelogFile="true"/>
+    </changeSet>
    
 </databaseChangeLog>
