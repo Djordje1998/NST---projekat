@@ -42,6 +42,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
             String message = error.getDefaultMessage();
             errors.put(fieldName, message);
         }
+        
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
     
