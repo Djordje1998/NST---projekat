@@ -8,15 +8,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import nst.springboot.restexample01.controller.domain.EntityObject;
 import nst.springboot.restexample01.converter.DtoEntityConverter;
-import nst.springboot.restexample01.dto.DtoObject; 
+import nst.springboot.restexample01.dto.DtoObject;
 
 public class AbstractCrudServiceImpl<D extends DtoObject, E extends EntityObject> {
 
-    @Autowired
-    private DtoEntityConverter<D, E> converter;
+    private final DtoEntityConverter<D, E> converter;
+
+    private final JpaRepository<E, Long> repository;
 
     @Autowired
-    private JpaRepository<E, Long> repository;
+    public AbstractCrudServiceImpl(DtoEntityConverter<D, E> converter, JpaRepository<E, Long> repository) {
+        this.converter = converter;
+        this.repository = repository;
+    }
 
     public D save(D dto) throws Exception {
         dto.setId(null);

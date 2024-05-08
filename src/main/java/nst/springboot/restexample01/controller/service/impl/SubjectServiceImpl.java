@@ -17,17 +17,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class SubjectServiceImpl implements SubjectService {
 
-    @Autowired
-    private DepartmentConverter departmentConverter;
+    private final DepartmentConverter departmentConverter;
+
+    private final DepartmentRepository departmentRepository;
+
+    private final SubjectConverter subjectConverter;
+
+    private final SubjectRepository subjectRepository;
 
     @Autowired
-    private DepartmentRepository departmentRepository;
-
-    @Autowired
-    private SubjectConverter subjectConverter;
-
-    @Autowired
-    private SubjectRepository subjectRepository;
+    public SubjectServiceImpl(DepartmentConverter departmentConverter, DepartmentRepository departmentRepository,
+            SubjectConverter subjectConverter, SubjectRepository subjectRepository) {
+        this.departmentConverter = departmentConverter;
+        this.departmentRepository = departmentRepository;
+        this.subjectConverter = subjectConverter;
+        this.subjectRepository = subjectRepository;
+    }
 
     @Override
     public SubjectDto save(SubjectDto subjectDto) throws Exception {

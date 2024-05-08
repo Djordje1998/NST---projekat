@@ -22,17 +22,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
-    @Autowired
-    private DepartmentConverter departmentConverter;
+    private final DepartmentConverter departmentConverter;
+
+    private final DepartmentRepository departmentRepository;
+
+    private final DepartmentRoleHistoryRepository departmentRoleHistoryRepository;
+
+    private final MemberRepository memberRepository;
 
     @Autowired
-    private DepartmentRepository departmentRepository;
-
-    @Autowired
-    private DepartmentRoleHistoryRepository departmentRoleHistoryRepository;
-
-    @Autowired
-    private MemberRepository memberRepository;
+    public DepartmentServiceImpl(DepartmentConverter departmentConverter, DepartmentRepository departmentRepository,
+            DepartmentRoleHistoryRepository departmentRoleHistoryRepository, MemberRepository memberRepository) {
+        this.departmentConverter = departmentConverter;
+        this.departmentRepository = departmentRepository;
+        this.departmentRoleHistoryRepository = departmentRoleHistoryRepository;
+        this.memberRepository = memberRepository;
+    }
 
     @Override
     public DepartmentDto save(DepartmentDto departmentDto) throws Exception {
