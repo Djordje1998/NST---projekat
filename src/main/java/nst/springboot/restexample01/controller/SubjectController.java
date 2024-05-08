@@ -2,8 +2,9 @@ package nst.springboot.restexample01.controller;
 
 import jakarta.validation.Valid;
 import java.util.List;
-import nst.springboot.restexample01.controller.service.SubjectService;
+
 import nst.springboot.restexample01.dto.SubjectDto;
+import nst.springboot.restexample01.service.SubjectService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,8 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/subject")
 public class SubjectController {
 
+    private final SubjectService subjectService;
+
     @Autowired
-    private SubjectService subjectService;
+    public SubjectController(SubjectService subjectService) {
+        this.subjectService = subjectService;
+    }
 
     @PostMapping
     public ResponseEntity<SubjectDto> save(@Valid @RequestBody SubjectDto subject) throws Exception {

@@ -2,10 +2,11 @@ package nst.springboot.restexample01.controller;
 
 import jakarta.validation.Valid;
 import java.util.List;
-import nst.springboot.restexample01.controller.service.DepartmentService;
+
 import nst.springboot.restexample01.dto.DepartmentDto;
 import nst.springboot.restexample01.exception.DepartmentAlreadyExistException;
 import nst.springboot.restexample01.exception.MyErrorDetails;
+import nst.springboot.restexample01.service.DepartmentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,8 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/department")
 public class DepartmentController {
 
+    private final DepartmentService departmentService;
+
     @Autowired
-    private DepartmentService departmentService;
+    public DepartmentController(DepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
 
     @PostMapping
     public ResponseEntity<DepartmentDto> save(@Valid @RequestBody DepartmentDto departmentDto) throws Exception {

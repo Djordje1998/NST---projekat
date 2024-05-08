@@ -13,15 +13,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import nst.springboot.restexample01.controller.service.MemberService;
 import nst.springboot.restexample01.dto.MemberDto;
+import nst.springboot.restexample01.service.MemberService;
 
 @RestController
 @RequestMapping("/member")
 public class MemberController {
 
+    private final MemberService memberService;
+
     @Autowired
-    private MemberService memberService;
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
 
     @PostMapping
     public ResponseEntity<MemberDto> save(@RequestBody MemberDto member) throws Exception {
