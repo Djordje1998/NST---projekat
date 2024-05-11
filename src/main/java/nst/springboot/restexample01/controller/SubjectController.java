@@ -1,9 +1,12 @@
 package nst.springboot.restexample01.controller;
 
+import jakarta.persistence.EntityExistsException;
 import jakarta.validation.Valid;
 import java.util.List;
-import nst.springboot.restexample01.controller.service.SubjectService;
+import java.util.NoSuchElementException;
+
 import nst.springboot.restexample01.dto.SubjectDto;
+import nst.springboot.restexample01.service.SubjectService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,11 +24,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/subject")
 public class SubjectController {
 
+    private final SubjectService subjectService;
+
     @Autowired
-    private SubjectService subjectService;
+    public SubjectController(SubjectService subjectService) {
+        this.subjectService = subjectService;
+    }
 
     @PostMapping
-    public ResponseEntity<SubjectDto> save(@Valid @RequestBody SubjectDto subject) throws Exception {
+    public ResponseEntity<SubjectDto> save(@Valid @RequestBody SubjectDto subject) throws  NoSuchElementException, EntityExistsException {
         return ResponseEntity.status(HttpStatus.CREATED).body(subjectService.save(subject));
     }
 
@@ -35,17 +42,17 @@ public class SubjectController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SubjectDto> findById(@PathVariable("id") Long id) throws Exception {
+    public ResponseEntity<SubjectDto> findById(@PathVariable("id") Long id) throws NoSuchElementException {
         return ResponseEntity.ok(subjectService.findById(id));
     }
 
     @PatchMapping
-    public ResponseEntity<SubjectDto> update(@Valid @RequestBody SubjectDto subject) throws Exception {
+    public ResponseEntity<SubjectDto> update(@Valid @RequestBody SubjectDto subject) throws NoSuchElementException {
         return ResponseEntity.ok(subjectService.update(subject));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) throws Exception {
+    public ResponseEntity<String> delete(@PathVariable Long id) throws NoSuchElementException {
         subjectService.delete(id);
         return new ResponseEntity<>("Subject removed!", HttpStatus.OK);
     }

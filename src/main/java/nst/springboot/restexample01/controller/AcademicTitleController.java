@@ -1,7 +1,9 @@
 package nst.springboot.restexample01.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,20 +16,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
-import nst.springboot.restexample01.controller.service.impl.AcademicTitleServiceImpl;
 import nst.springboot.restexample01.dto.AcademicTitleDto;
+import nst.springboot.restexample01.service.impl.AcademicTitleServiceImpl;
 
 @RestController
 @RequestMapping("/academic-title")
 public class AcademicTitleController {
+    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(AcademicTitleController.class);
+
+    private final AcademicTitleServiceImpl academicTitleService;
 
     @Autowired
-    private AcademicTitleServiceImpl academicTitleService;
+    public AcademicTitleController(AcademicTitleServiceImpl academicTitleService) {
+        this.academicTitleService = academicTitleService;
+    }
 
     @PostMapping
     public ResponseEntity<AcademicTitleDto> save(@Valid @RequestBody AcademicTitleDto academicTitleDto)
-            throws Exception {
-        System.out.println("Kreiranje " + academicTitleDto.getName());
+            throws NoSuchElementException {
+        LOGGER.info("Kreiranje {}", academicTitleDto.getName());
         return ResponseEntity.ok(academicTitleService.save(academicTitleDto));
     }
 
@@ -37,18 +44,18 @@ public class AcademicTitleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AcademicTitleDto> findById(@PathVariable("id") Long id) throws Exception {
+    public ResponseEntity<AcademicTitleDto> findById(@PathVariable("id") Long id) throws NoSuchElementException {
         return ResponseEntity.ok(academicTitleService.findById(id));
     }
 
     @PatchMapping
     public ResponseEntity<AcademicTitleDto> update(@Valid @RequestBody AcademicTitleDto academicTitleDto)
-            throws Exception {
+            throws NoSuchElementException {
         return ResponseEntity.ok(academicTitleService.update(academicTitleDto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) throws Exception {
+    public ResponseEntity<String> delete(@PathVariable Long id) throws NoSuchElementException {
         academicTitleService.delete(id);
         return ResponseEntity.ok("Academic title removed!");
     }

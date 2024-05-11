@@ -3,24 +3,29 @@ package nst.springboot.restexample01.converter.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import nst.springboot.restexample01.controller.domain.Member;
 import nst.springboot.restexample01.converter.DtoEntityConverter;
+import nst.springboot.restexample01.domain.Member;
 import nst.springboot.restexample01.dto.MemberDto;
 
 @Component
 public class MemberConverter implements DtoEntityConverter<MemberDto, Member> {
 
-    @Autowired
-    private DepartmentConverter departmentConverter;
+    private final DepartmentConverter departmentConverter;
+
+    private final EducationTitleConverter educationTitleConverter;
+
+    private final AcademicTitleConverter academicTitleConverter;
+
+    private final ScientificFieldConverter scientificFieldConverter;
 
     @Autowired
-    private EducationTitleConverter educationTitleConverter;
-
-    @Autowired
-    private AcademicTitleConverter academicTitleConverter;
-
-    @Autowired
-    private ScientificFieldConverter scientificFieldConverter;
+    public MemberConverter(DepartmentConverter departmentConverter, EducationTitleConverter educationTitleConverter,
+            AcademicTitleConverter academicTitleConverter, ScientificFieldConverter scientificFieldConverter) {
+        this.departmentConverter = departmentConverter;
+        this.educationTitleConverter = educationTitleConverter;
+        this.academicTitleConverter = academicTitleConverter;
+        this.scientificFieldConverter = scientificFieldConverter;
+    }
 
     @Override
     public MemberDto toDto(Member e) {
