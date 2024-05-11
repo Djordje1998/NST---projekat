@@ -1,5 +1,6 @@
+package nst.springboot.restexample01.controller;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nst.springboot.restexample01.controller.SubjectController;
 import nst.springboot.restexample01.dto.DepartmentDto;
 import nst.springboot.restexample01.dto.SubjectDto;
 import nst.springboot.restexample01.service.SubjectService;
@@ -9,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ class SubjectControllerTest {
 
     @BeforeEach
     public void setup() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(subjectController).build();
         objectMapper = new ObjectMapper();
     }

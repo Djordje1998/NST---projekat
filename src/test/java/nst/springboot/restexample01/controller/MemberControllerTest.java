@@ -7,7 +7,6 @@ import nst.springboot.restexample01.dto.DepartmentDto;
 import nst.springboot.restexample01.dto.EducationTitleDto;
 import nst.springboot.restexample01.dto.MemberDto;
 import nst.springboot.restexample01.dto.ScientificFieldDto;
-import nst.springboot.restexample01.dto.SubjectDto;
 import nst.springboot.restexample01.service.MemberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -53,8 +51,10 @@ class MemberControllerTest {
         AcademicTitleDto academicTitleDto = new AcademicTitleDto(1L, "Academic1");
         ScientificFieldDto scientificFieldDto = new ScientificFieldDto(1L, "Scientific1");
 
-        this.memberDto = new MemberDto(1L, "John", "Doe", departmentDto, educationTitleDto, academicTitleDto, scientificFieldDto);
-        this.memberDto2 = new MemberDto(2L, "John2", "Doe2", departmentDto, educationTitleDto, academicTitleDto, scientificFieldDto);
+        this.memberDto = new MemberDto(1L, "John", "Doe", departmentDto, educationTitleDto, academicTitleDto,
+                scientificFieldDto);
+        this.memberDto2 = new MemberDto(2L, "John2", "Doe2", departmentDto, educationTitleDto, academicTitleDto,
+                scientificFieldDto);
     }
 
     @Test
