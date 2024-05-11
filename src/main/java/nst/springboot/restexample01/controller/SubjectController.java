@@ -1,7 +1,9 @@
 package nst.springboot.restexample01.controller;
 
+import jakarta.persistence.EntityExistsException;
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import nst.springboot.restexample01.dto.SubjectDto;
 import nst.springboot.restexample01.service.SubjectService;
@@ -30,7 +32,7 @@ public class SubjectController {
     }
 
     @PostMapping
-    public ResponseEntity<SubjectDto> save(@Valid @RequestBody SubjectDto subject) throws Exception {
+    public ResponseEntity<SubjectDto> save(@Valid @RequestBody SubjectDto subject) throws  NoSuchElementException, EntityExistsException {
         return ResponseEntity.status(HttpStatus.CREATED).body(subjectService.save(subject));
     }
 
@@ -40,17 +42,17 @@ public class SubjectController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SubjectDto> findById(@PathVariable("id") Long id) throws Exception {
+    public ResponseEntity<SubjectDto> findById(@PathVariable("id") Long id) throws NoSuchElementException {
         return ResponseEntity.ok(subjectService.findById(id));
     }
 
     @PatchMapping
-    public ResponseEntity<SubjectDto> update(@Valid @RequestBody SubjectDto subject) throws Exception {
+    public ResponseEntity<SubjectDto> update(@Valid @RequestBody SubjectDto subject) throws NoSuchElementException {
         return ResponseEntity.ok(subjectService.update(subject));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) throws Exception {
+    public ResponseEntity<String> delete(@PathVariable Long id) throws NoSuchElementException {
         subjectService.delete(id);
         return new ResponseEntity<>("Subject removed!", HttpStatus.OK);
     }

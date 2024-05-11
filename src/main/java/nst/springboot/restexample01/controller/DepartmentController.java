@@ -2,6 +2,7 @@ package nst.springboot.restexample01.controller;
 
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import nst.springboot.restexample01.dto.DepartmentDto;
 import nst.springboot.restexample01.exception.DepartmentAlreadyExistException;
@@ -33,7 +34,7 @@ public class DepartmentController {
     }
 
     @PostMapping
-    public ResponseEntity<DepartmentDto> save(@Valid @RequestBody DepartmentDto departmentDto) throws Exception {
+    public ResponseEntity<DepartmentDto> save(@Valid @RequestBody DepartmentDto departmentDto) throws DepartmentAlreadyExistException {
         return new ResponseEntity<>(departmentService.save(departmentDto), HttpStatus.CREATED);
     }
 
@@ -43,17 +44,17 @@ public class DepartmentController {
     }
 
     @GetMapping("/{id}")
-    public DepartmentDto findById(@PathVariable("id") Long id) throws Exception {
+    public DepartmentDto findById(@PathVariable("id") Long id) throws NoSuchElementException {
         return departmentService.findById(id);
     }
 
     @PatchMapping
-    public ResponseEntity<DepartmentDto> update(@Valid @RequestBody DepartmentDto department) throws Exception {
+    public ResponseEntity<DepartmentDto> update(@Valid @RequestBody DepartmentDto department) throws NoSuchElementException {
         return new ResponseEntity<>(departmentService.update(department), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) throws Exception {
+    public ResponseEntity<String> delete(@PathVariable Long id) throws NoSuchElementException {
         departmentService.delete(id);
         return new ResponseEntity<>("Department removed!", HttpStatus.OK);
     }
