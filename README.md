@@ -1,1 +1,1 @@
-Automatizacija razvoja softvera - projekat
+Napredne softveske tehnologije - projekat
